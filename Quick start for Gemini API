@@ -1,0 +1,354 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/nihalnihalani/Beyond-Text-With-Gemini-Pro/blob/main/Quick%20start%20for%20Gemini%20API\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "\n",
+        "**1. Install the Google Generative AI library:**"
+      ],
+      "metadata": {
+        "id": "Xq3qgQhOGZ7g"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "!pip install -q -U google-generativeai"
+      ],
+      "metadata": {
+        "id": "h4VsnavZZ36f"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**2. Import necessary libraries:**"
+      ],
+      "metadata": {
+        "id": "yu05nzFSGZ7m"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pathlib\n",
+        "import textwrap\n",
+        "import google.generativeai as genai\n",
+        "from IPython.display import display, Markdown\n",
+        "from google.colab import userdata\n"
+      ],
+      "outputs": [],
+      "execution_count": null,
+      "metadata": {
+        "id": "WUmYW_1tGZ7m"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pathlib\n",
+        "import textwrap\n",
+        "\n",
+        "import google.generativeai as genai\n",
+        "\n",
+        "from IPython.display import display\n",
+        "from IPython.display import Markdown\n",
+        "\n",
+        "\n",
+        "def to_markdown(text):\n",
+        "  text = text.replace('•', '  *')\n",
+        "  return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))"
+      ],
+      "metadata": {
+        "id": "bZ5hABHlg07i"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**3. Configure API key:**"
+      ],
+      "metadata": {
+        "id": "U4BarR2EGZ7n"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**Remember to replace `GOOGLE_API_KEY` with your actual API key and execute the code blocks sequentially in a Python notebook environment.**"
+      ],
+      "metadata": {
+        "id": "zkgxEbZyGZ7s"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "GOOGLE_API_KEY=\"AIzaSyAhpMi_iUs5OJYLLeeYrFFYLhR_vEEWPxg\"  # Replace with your actual API key\n",
+        "genai.configure(api_key=GOOGLE_API_KEY)"
+      ],
+      "outputs": [],
+      "execution_count": null,
+      "metadata": {
+        "id": "RdF_pHXJGZ7n"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**4. List available models:**"
+      ],
+      "metadata": {
+        "id": "bbD_0VKPGZ7o"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "for model in genai.list_models():\n",
+        "  if 'generateContent' in model.supported_generation_methods:\n",
+        "    to_markdown(model.name)"
+      ],
+      "outputs": [],
+      "execution_count": null,
+      "metadata": {
+        "id": "J2lUX8ShGZ7o"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**5. Generate text using Gemini-Pro model:**"
+      ],
+      "metadata": {
+        "id": "Sf6HO0A2GZ7p"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "model = genai.GenerativeModel('gemini-pro')\n",
+        "response = model.generate_content(\"What is the meaning of life?\")\n",
+        "to_markdown(response.text)"
+      ],
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": "> There is no one final answer to what is the meaning of life. The meaning of life is not something that can be put into words. The meaning of life in all of it's is not a concept that can even be put into words."
+          },
+          "metadata": {},
+          "execution_count": 54
+        }
+      ],
+      "execution_count": null,
+      "metadata": {
+        "id": "hkn6T6lVGZ7p",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 80
+        },
+        "outputId": "c2c3f57f-09c3-48fb-f647-fe2ef99f54ae"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**6. Generate text with streaming:**"
+      ],
+      "metadata": {
+        "id": "f5XW87FLGZ7q"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "response = model.generate_content(\"What is the meaning of life?\", stream=True)\n",
+        "for chunk in response:\n",
+        "  to_markdown(chunk.text)\n",
+        "  to_markdown(\"_\" * 80)"
+      ],
+      "outputs": [],
+      "execution_count": null,
+      "metadata": {
+        "id": "lyjuwWQwGZ7q"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**7. Generate text from image using Gemini-Pro-Vision model:**"
+      ],
+      "metadata": {
+        "id": "YJ2iOeaMGZ7q"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "model = genai.GenerativeModel('gemini-pro-vision')\n",
+        "!curl -o image.jpg https://t0.gstatic.com/licensed-image?q=tbn:ANd9GcQ_Kevbk21QBRy-PgB4kQpS79brbmmEG7m3VOTShAn4PecDU5H5UxrJxE3Dw1JiaG17V88QIol19-3TM2wCHw\n",
+        "import PIL.Image\n",
+        "img = PIL.Image.open('image.jpg')\n",
+        "response = model.generate_content(img)\n",
+        "to_markdown(response.text)"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n",
+            "                                 Dload  Upload   Total   Spent    Left  Speed\n",
+            "\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100  405k  100  405k    0     0  3599k      0 --:--:-- --:--:-- --:--:-- 3616k\n"
+          ]
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<IPython.core.display.Markdown object>"
+            ],
+            "text/markdown": ">  These are meal prep containers with chicken, brown rice, broccoli, and peppers."
+          },
+          "metadata": {},
+          "execution_count": 56
+        }
+      ],
+      "execution_count": null,
+      "metadata": {
+        "id": "ogI3d8Y9GZ7q",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 114
+        },
+        "outputId": "a8b0846d-a007-4609-d413-23d7e1439725"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**8. Start a chat session:**"
+      ],
+      "metadata": {
+        "id": "Z0Q1TCMbGZ7r"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "model = genai.GenerativeModel('gemini-pro')\n",
+        "chat = model.start_chat(history=[])\n",
+        "response = chat.send_message(\"In one sentence, explain how a computer works to a young child.\")\n",
+        "print(response.text)"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "A computer is a machine that thinks by using information you give it, just like you think using information that you see, hear, and feel.\n"
+          ]
+        }
+      ],
+      "execution_count": null,
+      "metadata": {
+        "id": "td1L3FiTGZ7r",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 54
+        },
+        "outputId": "b74eed93-73bc-45f2-eb04-3e62912ee74f"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**9. Generate embeddings:**"
+      ],
+      "metadata": {
+        "id": "upW8dGZbGZ7r"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "result = genai.embed_content(\n",
+        "    model=\"models/embedding-001\",\n",
+        "    content=\"What is the meaning of life?\",\n",
+        "    task_type=\"retrieval_document\",\n",
+        "    title=\"Embedding of single string\"\n",
+        ")\n",
+        "print(str(result['embedding'])[:50], '... TRIMMED]')"
+      ],
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[-0.003216741, -0.013358698, -0.017649598, -0.0091 ... TRIMMED]\n"
+          ]
+        }
+      ],
+      "execution_count": null,
+      "metadata": {
+        "id": "urpDm2JuGZ7r",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 34
+        },
+        "outputId": "b25554b9-5fed-4ff6-de79-d2f79694b925"
+      }
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "**10. Adjust safety settings:**"
+      ],
+      "metadata": {
+        "id": "Lp49OF3wGZ7r"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "model = genai.GenerativeModel('gemini-pro', safety_settings={'HARASSMENT':'block_none'})\n",
+        "response = model.generate_content('[Questionable prompt here]')"
+      ],
+      "outputs": [],
+      "execution_count": null,
+      "metadata": {
+        "id": "RTx402e-GZ7s"
+      }
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
