@@ -1,4 +1,4 @@
-# Beyond-Text-With-Gemini-Pro
+# Beyond Text With Gemini Pro
 ## Go beyond text with Gemini's revolutionary capabilities.
 
   <td>
