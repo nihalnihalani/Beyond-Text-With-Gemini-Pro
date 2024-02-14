@@ -12,6 +12,7 @@
   <td>
     <a target="_blank" href="https://github.com/nihalnihalani/Beyond-Text-With-Gemini-Pro/blob/main/Gemini_ai_story_generator_for_kids.ipynb"> <img src="https://www.tensorflow.org/images/GitHub-Mark-32px.png" /> View source on GitHub</a>
   </td>
+  
   ![](assets/5im.jpeg)
 
 ### Voyage through Time: Engage in Conversations with Icons from the Past"
