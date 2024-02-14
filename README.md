@@ -15,7 +15,7 @@
   
   ![](asset/5im.jpeg)
 
-### Voyage through Time: Engage in Conversations with Icons from the Past"
+### Voyage through Time: Engage in Conversations with Icons from the Past
 
  <td>
     <a target="_blank" href="https://colab.research.google.com/github/nihalnihalani/Beyond-Text-With-Gemini-Pro/blob/main/Speaking_with_historical_figures_Gemini_pro_demo.ipynb"> <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />Run in Google Colab</a>
