@@ -1,5 +1,5 @@
 # Beyond Text With Gemini Pro
-#Go beyond text with Gemini's revolutionary capabilities.
+# Go beyond text with Gemini's revolutionary capabilities.
 
 
 ## Gemini AI Story Generator for Kids
