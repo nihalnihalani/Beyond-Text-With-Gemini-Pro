@@ -4,7 +4,7 @@
 
 ## Gemini AI Story Generator for Kids
 
-###A creative AI-powered storytelling tool designed to spark children's imaginations
+### A creative AI-powered storytelling tool designed to spark children's imaginations
 
  <td>
     <a target="_blank" href="https://colab.research.google.com/github/nihalnihalani/Beyond-Text-With-Gemini-Pro/blob/main/Gemini_ai_story_generator_for_kids.ipynb"> <img src="https://www.tensorflow.org/images/colab_logo_32px.png" />Run in Google Colab</a>
